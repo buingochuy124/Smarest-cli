@@ -5,6 +5,7 @@ import AuthState from "./context/auth/AuthState";
 import Footer from "./layout/Footer";
 import Home from "./layout/Home";
 import Navbar from "./layout/Navbar";
+
 function App() {
   return (
     <>
@@ -14,10 +15,15 @@ function App() {
             <div>
               <Navbar />
             </div>
-            <div className="dark:bg-gray-900">
+            <div className="h-screen dark:bg-gray-900 ">
               <Home />
+              <div className="dark:bg-gray-900">
+                <br />
+                <br /> <br /> <br /> <br />
+              </div>
             </div>
-            <div className=" dark:bg-gray-800">
+
+            <div className="footer">
               <Footer />
             </div>
           </div>

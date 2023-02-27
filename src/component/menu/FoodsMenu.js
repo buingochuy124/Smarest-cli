@@ -8,7 +8,7 @@ const FoodsMenu = () => {
   const [foods, setFoods] = useState([]);
 
   const authContext = useContext(AuthContext);
-  const { isLoggedIn, userToken, userData } = authContext;
+  const { isLoggedIn, userToken } = authContext;
   const [foodOrder, setFoodOrder] = useState({
     Id: "",
   });
@@ -44,20 +44,7 @@ const FoodsMenu = () => {
 
   const handleOrder = async (foodId) => {
     setFoodOrder({ ...foodOrder, Id: foodId });
-
-    // await axios
-    //   .post("https://localhost:44307/api/carts/addtocart", foodOrder, {
-    //     headers: {
-    //       Authorization: `Bearer ${userToken}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    console.log(foodOrder.Id);
   };
 
   return (
@@ -68,12 +55,14 @@ const FoodsMenu = () => {
             <h2 className="text-white">
               {food.name}: {food.cost}$
             </h2>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => handleOrder(food.id)}
-            >
-              Order
-            </button>
+            {isLoggedIn && (
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => handleOrder(food.id)}
+              >
+                Order
+              </button>
+            )}
           </div>
           <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600">
             <img

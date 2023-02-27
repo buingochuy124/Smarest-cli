@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import AuthApi from "../../api/AuthApi";
 import AuthenContext from "./authContext";
 import AuthenReducer from "./authReducer";
-import { USER_LOGIN, USER_LOGOUT } from "./types";
+import { USER_LOGIN, USER_LOGOUT, USER_TABLE } from "./types";
 
 const AuthState = (props) => {
   const initialState = {
@@ -10,6 +10,7 @@ const AuthState = (props) => {
     userData: {},
     isManager: false,
     userToken: "",
+    userCurrentTable: "",
     shareLinkItems: [
       {
         id: 1,
@@ -56,6 +57,12 @@ const AuthState = (props) => {
       });
     }
   };
+  const userTable = async (table) => {
+    dispatch({
+      type: USER_TABLE,
+      payload: table,
+    });
+  };
   const logoutUser = async () => {
     const response = await authApi.logout();
     if (response.status === 200) {
@@ -69,9 +76,11 @@ const AuthState = (props) => {
       value={{
         isLoggedIn: state.isLoggedIn,
         userData: state.userData,
+        userCurrentTable: state.userCurrentTable,
         shareLinkItems: state.shareLinkItems,
         authLinkItems: state.authLinkItems,
         userToken: state.userToken,
+        userTable,
         loginUser,
         logoutUser,
       }}

@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT } from "./types";
+import { USER_LOGIN, USER_LOGOUT, USER_TABLE } from "./types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
@@ -70,7 +70,11 @@ export default (state, action) => {
           },
         ],
       };
-
+    case USER_TABLE:
+      return {
+        ...state,
+        userCurrentTable: action.payload,
+      };
     default:
       return state;
   }

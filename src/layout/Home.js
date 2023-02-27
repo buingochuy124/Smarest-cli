@@ -5,13 +5,15 @@ import NotFound from "../pages/error/NotFound";
 import About from "../pages/Unauthenticated/About";
 import Login from "../pages/Unauthenticated/Login";
 import Register from "../pages/Unauthenticated/Register";
+import Table from "../pages/Unauthenticated/Table";
 import Booking from "../pages/user/Booking";
+import Cart from "../pages/user/Cart";
 import Profile from "../pages/user/Profile";
 import Share from "../pages/user/Share";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  const { isLoggedIn } = authContext;
+  const { table, isLoggedIn } = authContext;
 
   return (
     <>
@@ -23,10 +25,10 @@ const Home = () => {
           {isLoggedIn ? <Redirect to="/register" /> : <Register />}
         </Route>
         <Route exact path="/login">
-          {isLoggedIn ? <Redirect to="/share" /> : <Login />}
+          {isLoggedIn ? <Redirect to="/table" /> : <Login />}
         </Route>
         <Route exact path="/cart">
-          {isLoggedIn ? <Redirect to="/cart" /> : <Login />}
+          {isLoggedIn ? <Cart /> : <Login />}
         </Route>
         <Route exact path="/share">
           {<Share />}
@@ -37,6 +39,13 @@ const Home = () => {
         <Route exact path="/about">
           {<About />}
         </Route>
+        <Route exact path="/table">
+          {table ? <Redirect to="/share" /> : <Table />}
+        </Route>
+        <Route exact path="/table/:tableId">
+          {table ? <Redirect to="/share" /> : <Table />}
+        </Route>
+
         <Route exact path="/profile">
           {!isLoggedIn ? <Redirect to="/login" /> : <Profile />}
         </Route>
