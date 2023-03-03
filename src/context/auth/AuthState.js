@@ -9,6 +9,8 @@ const AuthState = (props) => {
   const initialState = {
     isLoggedIn: false,
     userData: {},
+    tablesData: [],
+
     isManager: false,
     userToken: "",
     refreshToken: "",
@@ -100,6 +102,8 @@ const AuthState = (props) => {
       value={{
         isLoggedIn: state.isLoggedIn,
         userData: state.userData,
+        tablesData: state.TablesData,
+
         userCurrentTable: state.userCurrentTable,
         shareLinkItems: state.shareLinkItems,
         authLinkItems: state.authLinkItems,

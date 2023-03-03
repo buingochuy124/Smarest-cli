@@ -8,6 +8,8 @@ export default (state, action) => {
         ...state,
         isLoggedIn: true,
         userData: action.payload,
+        tablesData: [],
+
         userToken: action.payload.message,
         refreshToken: action.payload.refreshToken,
         shareLinkItems: [
@@ -45,6 +47,8 @@ export default (state, action) => {
         ...state,
         isLoggedIn: false,
         userData: {},
+        TablesData: [],
+
         userToken: "",
         refreshToken: "",
         userCurrentTable: "",

@@ -8,7 +8,7 @@ export default (state, action) => {
     case LIST_TABLE:
       return {
         ...state,
-        TablesData: action.payload,
+        tablesData: action.payload,
       };
     case USER_TOKEN:
       return {
