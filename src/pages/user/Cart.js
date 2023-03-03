@@ -23,7 +23,7 @@ const Cart = () => {
   }, [userToken]);
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="h-screen max-w-2xl mx-auto">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="p-4">
           <label htmlFor="table-search" className="sr-only">
@@ -47,9 +47,6 @@ const Cart = () => {
                   <th scope="col" className="px-6 py-3">
                     Total
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    Edit
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -68,15 +65,6 @@ const Cart = () => {
                     <td className="px-6 py-4">$ {item.cost}</td>
                     <td className="px-6 py-4">
                       $ {item.cost * item.itemQuantity}
-                    </td>
-
-                    <td className="px-6 py-4 text-right">
-                      <a
-                        href="#"
-                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                      >
-                        Edit
-                      </a>
                     </td>
                   </tr>
                 ))}

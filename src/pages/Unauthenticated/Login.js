@@ -10,14 +10,12 @@ const Login = () => {
     email: "",
     password: "",
   });
-  // let history = useHistory();
   const onChange = (e) => {
     const { name, value } = e.target;
     setLogin((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(login);
   };
 
   const onSubmit = async (e) => {
@@ -29,7 +27,6 @@ const Login = () => {
         email: "",
         password: "",
       });
-      console.log("joined");
     }
   };
   return (

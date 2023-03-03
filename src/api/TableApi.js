@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default class AuthApi {
+export default class TableApi {
   constructor() {
     this.client = null;
     this.api_url = "https://localhost:44307/api";
@@ -12,16 +12,15 @@ export default class AuthApi {
     });
     return this.client;
   };
-  register = (user) => {
-    return this.init().post("/auth/register", user, { withCredentials: true });
-  };
 
-  login = (user) => {
-    return this.init().post("/auth/login", user, { withCredentials: true });
-  };
-
-  logout = () => {
-    return this.init().post("/auth/logout", null, { withCredentials: true });
+  getListTable = () => {
+    const token = JSON.parse(localStorage.getItem("localState")).userToken;
+    return this.init().get("/tables", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
   };
   refreshToken = (userRefreshToken) => {
     const token = localStorage.getItem("localState");

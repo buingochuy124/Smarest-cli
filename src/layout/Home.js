@@ -10,6 +10,7 @@ import Booking from "../pages/user/Booking";
 import Cart from "../pages/user/Cart";
 import Profile from "../pages/user/Profile";
 import Share from "../pages/user/Share";
+import TableManager from "../pages/user/TableManager";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -38,6 +39,9 @@ const Home = () => {
         </Route>
         <Route exact path="/about">
           {<About />}
+        </Route>
+        <Route exact path="/tablemanager">
+          {<TableManager />}
         </Route>
         <Route exact path="/table">
           {table ? <Redirect to="/share" /> : <Table />}

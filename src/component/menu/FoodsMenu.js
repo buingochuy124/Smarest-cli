@@ -8,9 +8,11 @@ const FoodsMenu = () => {
   const [foods, setFoods] = useState([]);
 
   const authContext = useContext(AuthContext);
-  const { isLoggedIn, userToken } = authContext;
+  const { userCurrentTable, isLoggedIn, userToken } = authContext;
+
   const [foodOrder, setFoodOrder] = useState({
     Id: "",
+    tableId: "",
   });
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const FoodsMenu = () => {
   }, [foodOrder]);
 
   const handleOrder = async (foodId) => {
-    setFoodOrder({ ...foodOrder, Id: foodId });
+    setFoodOrder({ ...foodOrder, Id: foodId, tableId: userCurrentTable });
     console.log(foodOrder.Id);
   };
 
