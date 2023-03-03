@@ -5,7 +5,7 @@ import TableContext from "../../context/table/tableContext";
 const TableManager = () => {
   const tableContext = useContext(TableContext);
   const url = "http://localhost:3000/table/";
-  const { listTable, TablesData, refreshTokenIfNeeded } = tableContext;
+  const { listTable, tablesData, refreshTokenIfNeeded } = tableContext;
   // const [tables, setTables] = useState({
   //   id: "",
   //   name: "",
@@ -39,7 +39,7 @@ const TableManager = () => {
                 </tr>
               </thead>
               <tbody>
-                {TablesData.map((item) => (
+                {tablesData.map((item) => (
                   <tr key={item.id}>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
                       <div className="flex items-center">

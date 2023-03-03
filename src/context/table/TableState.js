@@ -7,7 +7,7 @@ import { LIST_TABLE, USER_TOKEN } from "./type";
 
 const TableState = (props) => {
   const initialState = {
-    TablesData: [],
+    tablesData: [],
     userToken: "",
     refreshToken: "",
   };
@@ -19,7 +19,6 @@ const TableState = (props) => {
 
   useEffect(() => {
     localStorage.setItem("localState", JSON.stringify(state));
-    refreshTokenIfNeeded();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const tableApi = new TableApi();
@@ -59,7 +58,7 @@ const TableState = (props) => {
   return (
     <TableContext.Provider
       value={{
-        TablesData: state.TablesData,
+        tablesData: state.tablesData,
         userToken: state.userToken,
         refreshToken: state.refreshToken,
         refreshTokenIfNeeded,
