@@ -4,12 +4,12 @@ import AuthContext from "../context/auth/authContext";
 import NotFound from "../pages/error/NotFound";
 import About from "../pages/Unauthenticated/About";
 import Login from "../pages/Unauthenticated/Login";
+import Main from "../pages/Unauthenticated/Main";
 import Register from "../pages/Unauthenticated/Register";
 import Table from "../pages/Unauthenticated/Table";
 import Booking from "../pages/user/Booking";
 import Cart from "../pages/user/Cart";
 import Profile from "../pages/user/Profile";
-import Share from "../pages/user/Share";
 import TableManager from "../pages/user/TableManager";
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
     <>
       <Switch>
         <Route exact path="/">
-          {<Share />}
+          {<Main />}
         </Route>
         <Route exact path="/register">
           {isLoggedIn ? <Redirect to="/register" /> : <Register />}
@@ -32,7 +32,7 @@ const Home = () => {
           {isLoggedIn ? <Cart /> : <Login />}
         </Route>
         <Route exact path="/share">
-          {<Share />}
+          {<Main />}
         </Route>
         <Route exact path="/booking">
           {<Booking />}

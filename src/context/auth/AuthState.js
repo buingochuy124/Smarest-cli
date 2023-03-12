@@ -10,7 +10,6 @@ const AuthState = (props) => {
     isLoggedIn: false,
     userData: {},
     tablesData: [],
-
     isManager: false,
     userToken: "",
     refreshToken: "",
@@ -49,6 +48,16 @@ const AuthState = (props) => {
   }, [state]);
 
   const authApi = new AuthApi();
+
+  const loginUserWithGoogle = async (credentialResponse) => {
+    const response = await authApi.loginWithGoogle(credentialResponse);
+    if (response.status === 200) {
+      dispatch({
+        type: USER_LOGIN,
+        payload: response.data,
+      });
+    }
+  };
 
   const loginUser = async (user) => {
     const response = await authApi.login(user);
@@ -108,6 +117,7 @@ const AuthState = (props) => {
         shareLinkItems: state.shareLinkItems,
         authLinkItems: state.authLinkItems,
         userToken: state.userToken,
+        loginUserWithGoogle,
         refreshTokenIfNeeded,
         userTable,
         loginUser,

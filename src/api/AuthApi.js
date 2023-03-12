@@ -33,4 +33,9 @@ export default class AuthApi {
       },
     });
   };
+  loginWithGoogle = (credentialResponse) => {
+    return this.init().post("/auth/google", credentialResponse, {
+      withCredentials: true,
+    });
+  };
 }

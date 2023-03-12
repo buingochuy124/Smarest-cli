@@ -1,14 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import { useContext, useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import { useContext, useEffect, useState } from "react";
+
 import AuthContext from "../../context/auth/authContext";
 
 const Login = () => {
   const authContext = useContext(AuthContext);
-  const { isLoggedIn, loginUser } = authContext;
+  const { isLoggedIn, loginUser, loginUserWithGoogle } = authContext;
   const [login, setLogin] = useState({
     email: "",
     password: "",
+  });
+  const [credentialResponse, setCredentialResponse] = useState({
+    credential: "",
   });
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -16,6 +21,13 @@ const Login = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+  useEffect(() => {
+    onLoginGoogle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const onLoginGoogle = () => {
+    loginUserWithGoogle(credentialResponse);
   };
 
   const onSubmit = async (e) => {
@@ -44,34 +56,41 @@ const Login = () => {
               Smarest
             </h2>
             <p className="text-xl text-gray-600 text-center">Welcome back!</p>
-            <a
-              href="#"
-              className="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100"
-            >
-              <div className="px-4 py-3">
-                <svg className="h-6 w-6" viewBox="0 0 40 40">
-                  <path
-                    d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
-                    fill="#FFC107"
-                  />
-                  <path
-                    d="M5.25497 12.2425L10.7308 16.2583C12.2125 12.59 15.8008 9.99999 20 9.99999C22.5491 9.99999 24.8683 10.9617 26.6341 12.5325L31.3483 7.81833C28.3716 5.04416 24.39 3.33333 20 3.33333C13.5983 3.33333 8.04663 6.94749 5.25497 12.2425Z"
-                    fill="#FF3D00"
-                  />
-                  <path
-                    d="M20 36.6667C24.305 36.6667 28.2167 35.0192 31.1742 32.34L26.0159 27.975C24.3425 29.2425 22.2625 30 20 30C15.665 30 11.9842 27.2359 10.5975 23.3784L5.16254 27.5659C7.92087 32.9634 13.5225 36.6667 20 36.6667Z"
-                    fill="#4CAF50"
-                  />
-                  <path
-                    d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
-                    fill="#1976D2"
-                  />
-                </svg>
-              </div>
-              <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">
-                Sign in with Google
-              </h1>
-            </a>
+            <br />
+            {/* <div className="h-20">
+              <iframe
+                title="Sign in with Google Button"
+                style={{
+                  display: "block",
+                  position: "relative",
+                  top: "0px",
+                  left: "0px",
+                  height: "44px",
+                  width: "202px",
+                  border: "0px",
+                  margin: "-2px -10px",
+                }}
+                src="https://accounts.google.com/gsi/button?type=standard&theme=outline&size=large&text=undefined&shape=undefined&logo_alignment=undefined&width=undefined&locale=undefined&click_listener=undefined&client_id=304531247476-58f940f3b0dgrupg95cdo8b51fspupdv.apps.googleusercontent.com&iframe_id=gsi_570883_390319&as=4bNWz5fCV6rGBgPp1KZx2Q"
+              ></iframe>
+            </div> */}
+            <div>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  const googleToken = JSON.stringify(
+                    credentialResponse.credential
+                  );
+                  setCredentialResponse({
+                    ...credentialResponse,
+                    credential: googleToken,
+                  });
+                  onLoginGoogle();
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+              ;
+            </div>
             <div className="mt-4 flex items-center justify-between">
               <span className="border-b w-1/5 lg:w-1/4"></span>
               <a
