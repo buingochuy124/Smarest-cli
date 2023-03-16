@@ -9,6 +9,7 @@ import Register from "../pages/Unauthenticated/Register";
 import Table from "../pages/Unauthenticated/Table";
 import Booking from "../pages/user/Booking";
 import Cart from "../pages/user/Cart";
+import CheckOut from "../pages/user/CheckOut";
 import Profile from "../pages/user/Profile";
 import TableManager from "../pages/user/TableManager";
 
@@ -36,6 +37,9 @@ const Home = () => {
         </Route>
         <Route exact path="/booking">
           {<Booking />}
+        </Route>
+        <Route exact path="/checkout">
+          {isLoggedIn ? <CheckOut /> : <Login />}
         </Route>
         <Route exact path="/about">
           {<About />}
