@@ -15,7 +15,9 @@ import TableManager from "../pages/user/TableManager";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  const { table, isLoggedIn } = authContext;
+  const { table, isLoggedIn, role } = authContext;
+  const isManager = role.includes("Manager");
+  const isGuest = role.includes("Guest");
 
   return (
     <>
@@ -45,7 +47,7 @@ const Home = () => {
           {<About />}
         </Route>
         <Route exact path="/tablemanager">
-          {<TableManager />}
+          {isManager ? <TableManager /> : <Main />}
         </Route>
         <Route exact path="/table">
           {table ? <Redirect to="/share" /> : <Table />}

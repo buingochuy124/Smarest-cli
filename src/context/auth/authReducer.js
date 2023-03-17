@@ -2,6 +2,7 @@ import {
   USER_LOGIN,
   USER_LOGIN_BY_GOOGLE,
   USER_LOGOUT,
+  USER_ROLE,
   USER_TABLE,
 } from "./types";
 
@@ -90,7 +91,7 @@ export default (state, action) => {
         isLoggedIn: false,
         userData: {},
         TablesData: [],
-
+        role: [],
         userToken: "",
         refreshToken: "",
         userCurrentTable: "",
@@ -124,6 +125,11 @@ export default (state, action) => {
       return {
         ...state,
         userCurrentTable: action.payload,
+      };
+    case USER_ROLE:
+      return {
+        ...state,
+        role: action.payload,
       };
     default:
       return state;

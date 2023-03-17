@@ -25,6 +25,7 @@ const FoodsMenu = () => {
   }, []);
 
   useEffect(() => {
+    //userRole();
     console.log(foodOrder.Id);
     if (foodOrder.Id !== "") {
       console.log(foodOrder.Id);
