@@ -17,7 +17,7 @@ const Home = () => {
   const authContext = useContext(AuthContext);
   const { table, isLoggedIn, role } = authContext;
   const isManager = role.includes("Manager");
-  const isGuest = role.includes("Guest");
+  //const isGuest = role.includes("Guest");
 
   return (
     <>
