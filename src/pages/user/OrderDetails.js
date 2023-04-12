@@ -1,17 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import OrderContext from "../../context/order/orderContext";
 
-const Profile = () => {
+const OrderDetails = () => {
   const orderContext = useContext(OrderContext);
-  const { orders, OrdersList } = orderContext;
-  const DetailButtonHandle = (orderId) => {
-    window.location.replace("/orderdetails/" + orderId);
-  };
+  const { orderDetails, OrderDetailList } = orderContext;
   useEffect(() => {
-    OrdersList();
+    OrderDetailList(window.location.pathname.substring(14));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return orders ? (
+  console.log("OrderDetails", orderDetails[0]);
+  return orderDetails ? (
     <div className="h-screen max-w-2xl mx-auto">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="p-4">
@@ -27,33 +25,34 @@ const Profile = () => {
                     No.
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Total
+                    Name
                   </th>
 
                   <th scope="col" className="px-6 py-3">
-                    Date
+                    Cost
                   </th>
-                  <th scope="col" className="px-6 py-3"></th>
+                  <th scope="col" className="px-6 py-3">
+                    quantity
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {orders.map((item, index) => (
+                {orderDetails.map((i, index) => (
                   <tr
-                    key={item.id}
+                    key={i.id}
                     className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                       {index + 1}
                     </td>
-                    <td className="px-5 py-4">$ {item.total}</td>
-                    <td className="px-5 py-4">{item.date}</td>
-                    <td>
-                      <button
-                        onClick={() => DetailButtonHandle(item.id)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
-                      >
-                        Detail
-                      </button>
+                    <td className="px-5 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                      {i.item.name}
+                    </td>
+                    <td className="px-5 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                      $ {i.item.cost}
+                    </td>
+                    <td className="px-5 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                      {i.quantity}
                     </td>
                   </tr>
                 ))}
@@ -68,4 +67,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default OrderDetails;

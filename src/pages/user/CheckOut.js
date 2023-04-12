@@ -3,6 +3,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/auth/authContext";
+import OrderContext from "../../context/order/orderContext";
 
 const CheckOut = () => {
   const CLIENT_ID =
@@ -29,6 +30,12 @@ const CheckOut = () => {
   const authContext = useContext(AuthContext);
   const { userToken } = authContext;
   const [cartItems, setCartItems] = useState([]);
+  const orderContext = useContext(OrderContext);
+  const { checkOut } = orderContext;
+
+  const paypalClick = () => {
+    checkOut();
+  };
 
   useEffect(() => {
     axios
@@ -126,6 +133,7 @@ const CheckOut = () => {
           </div>
           <br></br>
           <PayPalButtons
+            onClick={paypalClick}
             createOrder={createOrder}
             onApprove={onApprove}
             options={{

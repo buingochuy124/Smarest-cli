@@ -22,6 +22,7 @@ const Login = () => {
       [name]: value,
     }));
   };
+
   useEffect(() => {
     onLoginGoogle();
     // eslint-disable-next-line react-hooks/exhaustive-deps

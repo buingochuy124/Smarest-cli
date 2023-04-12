@@ -1,8 +1,11 @@
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useReducer } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import AuthApi from "../../api/AuthApi";
 import AuthenContext from "./authContext";
 import AuthenReducer from "./authReducer";
+
+import { toast } from "react-toastify";
 import {
   USER_LOGIN,
   USER_LOGOUT,
@@ -67,6 +70,8 @@ const AuthState = (props) => {
 
   const loginUser = async (user) => {
     const response = await authApi.login(user);
+    toast.success("Logged in !!!");
+
     if (response.status === 200) {
       dispatch({
         type: USER_LOGIN,
@@ -104,6 +109,7 @@ const AuthState = (props) => {
 
       const response = await authApi.refreshToken(userRefreshToken);
       console.log(response);
+
       if (response.status === 200) {
         dispatch({
           type: USER_TOKEN,
@@ -115,6 +121,7 @@ const AuthState = (props) => {
   const logoutUser = async () => {
     const response = await authApi.logout();
     if (response.status === 200) {
+      toast.success("Logged out !!!");
       dispatch({
         type: USER_LOGOUT,
       });

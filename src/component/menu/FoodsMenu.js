@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import AuthContext from "../../context/auth/authContext";
 /* eslint-disable jsx-a11y/heading-has-content */
 
@@ -26,9 +27,7 @@ const FoodsMenu = () => {
 
   useEffect(() => {
     //userRole();
-    console.log(foodOrder.Id);
     if (foodOrder.Id !== "") {
-      console.log(foodOrder.Id);
       axios
         .post("https://localhost:44307/api/carts/addtocart", foodOrder, {
           headers: {
@@ -37,17 +36,20 @@ const FoodsMenu = () => {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          if (response.status === 200) {
+            toast.success("Added to cart !!!");
+          } else {
+            toast.error("Some thing wrong2 !!!");
+          }
         })
         .catch((error) => {
-          console.log(error);
+          toast.error("Some thing wrong !!!");
         });
     }
   }, [foodOrder]);
 
   const handleOrder = async (foodId) => {
     setFoodOrder({ ...foodOrder, Id: foodId, tableId: userCurrentTable });
-    console.log(foodOrder.Id);
   };
 
   return (
