@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
-import Share from "../user/Share";
+import Main from "./Main";
 
 const Table = () => {
   const authContext = useContext(AuthContext);
@@ -11,7 +11,7 @@ const Table = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <Share />;
+  return <Main />;
 };
 
 export default Table;

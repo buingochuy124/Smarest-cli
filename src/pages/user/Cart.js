@@ -1,14 +1,26 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import axios from "axios";
+
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/auth/authContext";
 
 const Cart = () => {
   const authContext = useContext(AuthContext);
-
   const { userToken } = authContext;
   const [cartItems, setCartItems] = useState([]);
+
+  const totalHandle = () => {
+    let totalEach = 0;
+    cartItems.forEach((element) => {
+      totalEach += element.cost * element.itemQuantity;
+    });
+
+    return totalEach;
+  };
+  const CheckOutButtonHandle = () => {
+    window.location.href = "/checkout";
+  };
 
   useEffect(() => {
     axios
@@ -61,13 +73,38 @@ const Cart = () => {
                     >
                       {item.itemName}
                     </th>
-                    <td className="px-6 py-4">{item.itemQuantity}</td>
-                    <td className="px-6 py-4">$ {item.cost}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-5 py-4">{item.itemQuantity}</td>
+                    <td className="px-5 py-4">$ {item.cost}</td>
+                    <td className="px-5 py-4">
                       $ {item.cost * item.itemQuantity}
                     </td>
                   </tr>
                 ))}
+
+                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td className="px-36 py-4 dark:text-white"></td>
+                  <td className="px-6 py-4"></td>
+                  <td className="px-6 py-4 "> </td>
+                  <td className="px-5 py-4 "></td>
+                </tr>
+                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td className="px-6 py-4 dark:text-white font-medium">
+                    {" "}
+                    Total
+                  </td>
+                  <td className="px-6 py-4"></td>
+                  <td className="px-6 py-4  dark:text-white font-medium">
+                    $ {totalHandle()}
+                  </td>
+                  <td className="px-6 py-4 font-medium dark:text-white">
+                    <button
+                      onClick={CheckOutButtonHandle}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+                    >
+                      Check Out
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

@@ -1,17 +1,25 @@
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useReducer } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import AuthApi from "../../api/AuthApi";
 import AuthenContext from "./authContext";
 import AuthenReducer from "./authReducer";
-import { USER_LOGIN, USER_LOGOUT, USER_TABLE, USER_TOKEN } from "./types";
+
+import { toast } from "react-toastify";
+import {
+  USER_LOGIN,
+  USER_LOGOUT,
+  USER_ROLE,
+  USER_TABLE,
+  USER_TOKEN,
+} from "./types";
 
 const AuthState = (props) => {
   const initialState = {
     isLoggedIn: false,
     userData: {},
     tablesData: [],
-
-    isManager: false,
+    role: [],
     userToken: "",
     refreshToken: "",
     userCurrentTable: "",
@@ -33,11 +41,6 @@ const AuthState = (props) => {
         title: "Login",
         url: "/login",
       },
-      {
-        id: 2,
-        title: "Register",
-        url: "/register",
-      },
     ],
   };
   const [state, dispatch] = useReducer(AuthenReducer, initialState, () => {
@@ -50,8 +53,19 @@ const AuthState = (props) => {
 
   const authApi = new AuthApi();
 
+  const loginUserWithGoogle = async (credentialResponse) => {
+    const response = await authApi.loginWithGoogle(credentialResponse);
+    if (response.status === 200) {
+      dispatch({
+        type: USER_LOGIN,
+        payload: response.data,
+      });
+    }
+  };
+
   const loginUser = async (user) => {
     const response = await authApi.login(user);
+    toast.success("Logged in !!!");
 
     if (response.status === 200) {
       dispatch({
@@ -59,6 +73,15 @@ const AuthState = (props) => {
         payload: response.data,
       });
     }
+
+    const decoded = jwt_decode(response.data.message);
+    const role =
+      decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    console.log(role);
+    dispatch({
+      type: USER_ROLE,
+      payload: role,
+    });
   };
 
   const userTable = async (table) => {
@@ -81,6 +104,7 @@ const AuthState = (props) => {
 
       const response = await authApi.refreshToken(userRefreshToken);
       console.log(response);
+
       if (response.status === 200) {
         dispatch({
           type: USER_TOKEN,
@@ -92,6 +116,7 @@ const AuthState = (props) => {
   const logoutUser = async () => {
     const response = await authApi.logout();
     if (response.status === 200) {
+      toast.success("Logged out !!!");
       dispatch({
         type: USER_LOGOUT,
       });
@@ -103,11 +128,12 @@ const AuthState = (props) => {
         isLoggedIn: state.isLoggedIn,
         userData: state.userData,
         tablesData: state.TablesData,
-
+        role: state.role,
         userCurrentTable: state.userCurrentTable,
         shareLinkItems: state.shareLinkItems,
         authLinkItems: state.authLinkItems,
         userToken: state.userToken,
+        loginUserWithGoogle,
         refreshTokenIfNeeded,
         userTable,
         loginUser,
