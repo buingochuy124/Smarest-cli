@@ -27,14 +27,13 @@ function App() {
                     </div>
                     <div className=" dark:bg-gray-900 ">
                       <ToastContainer />
-
                       <Home />
                       <div className="dark:bg-gray-900">
                         <br />
-                        <br /> <br /> <br /> <br />
+                        <br />
+                        <br /> <br /> <br />
                       </div>
                     </div>
-
                     <div className="footer">
                       <Footer />
                     </div>

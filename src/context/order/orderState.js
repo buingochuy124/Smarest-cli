@@ -86,17 +86,16 @@ const TableState = (props) => {
     const localState = localStorage.getItem("localState");
     const userData = JSON.parse(localState).userData;
     const response = await orderApi.CheckOut(userData.message);
-    const myPromise = new Promise((resolve) =>
-      fetch("https://jsonplaceholder.typicode.com/post")
-        .then((response) => response.json())
-        .then((json) => setTimeout(() => resolve(json), 10000))
-    );
+
     if (response.status === 200) {
-      toast.promise(myPromise, {
-        pending: "Check Out is pending",
-        success: "Checked Out",
-        error: "error",
-      });
+      toast.promise(
+        new Promise((resolve) => setTimeout(() => resolve(1), 10000)),
+        {
+          pending: "Check Out is pending",
+          success: "Checked Out",
+          error: "error",
+        }
+      );
       console.log(response);
     } else {
       console.log("check out fail");

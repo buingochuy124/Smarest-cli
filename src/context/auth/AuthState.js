@@ -41,11 +41,6 @@ const AuthState = (props) => {
         title: "Login",
         url: "/login",
       },
-      {
-        id: 2,
-        title: "Register",
-        url: "/register",
-      },
     ],
   };
   const [state, dispatch] = useReducer(AuthenReducer, initialState, () => {

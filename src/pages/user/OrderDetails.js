@@ -8,7 +8,6 @@ const OrderDetails = () => {
     OrderDetailList(window.location.pathname.substring(14));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("OrderDetails", orderDetails[0]);
   return orderDetails ? (
     <div className="h-screen max-w-2xl mx-auto">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

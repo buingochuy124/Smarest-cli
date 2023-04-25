@@ -4,7 +4,6 @@ import AuthContext from "../context/auth/authContext";
 import About from "../pages/Unauthenticated/About";
 import Login from "../pages/Unauthenticated/Login";
 import Main from "../pages/Unauthenticated/Main";
-import Register from "../pages/Unauthenticated/Register";
 import Table from "../pages/Unauthenticated/Table";
 import NotFound from "../pages/error/NotFound";
 import Booking from "../pages/user/Booking";
@@ -26,9 +25,7 @@ const Home = () => {
         <Route exact path="/">
           {<Main />}
         </Route>
-        <Route exact path="/register">
-          {isLoggedIn ? <Redirect to="/register" /> : <Register />}
-        </Route>
+
         <Route exact path="/login">
           {isLoggedIn ? <Redirect to="/table" /> : <Login />}
         </Route>

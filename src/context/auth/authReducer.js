@@ -113,11 +113,6 @@ export default (state, action) => {
             title: "Login",
             url: "/login",
           },
-          {
-            id: 2,
-            title: "Register",
-            url: "/register",
-          },
         ],
       };
 
