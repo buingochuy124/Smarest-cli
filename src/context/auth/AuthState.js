@@ -65,9 +65,12 @@ const AuthState = (props) => {
 
   const loginUser = async (user) => {
     const response = await authApi.login(user);
-    toast.success("Logged in !!!");
 
+    if (response.status === 204) {
+      toast.error("Email or password wrong !!!");
+    }
     if (response.status === 200) {
+      toast.success("Logged in !!!");
       dispatch({
         type: USER_LOGIN,
         payload: response.data,

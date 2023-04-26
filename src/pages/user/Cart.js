@@ -24,7 +24,7 @@ const Cart = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:44307/api/carts/usercart", {
+      .get("http://103.179.189.219//carts/usercart", {
         headers: {
           Authorization: `Bearer ${userToken}`,
           "Content-Type": "application/json",

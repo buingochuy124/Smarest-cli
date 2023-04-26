@@ -18,7 +18,7 @@ const FoodsMenu = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:44307/api/items/foods", {
+      .get("http://103.179.189.219/api/items/foods", {
         withCredentials: true,
       })
       .then((response) => setFoods(response.data))
@@ -29,7 +29,7 @@ const FoodsMenu = () => {
     //userRole();
     if (foodOrder.Id !== "") {
       axios
-        .post("https://localhost:44307/api/carts/addtocart", foodOrder, {
+        .post("http://103.179.189.219/api/carts/addtocart", foodOrder, {
           headers: {
             Authorization: `Bearer ${userToken}`,
             "Content-Type": "application/json",

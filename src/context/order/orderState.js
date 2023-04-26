@@ -32,7 +32,7 @@ const TableState = (props) => {
     const userData = JSON.parse(localState).userData;
 
     axios
-      .get("https://localhost:44307/api/orders", {
+      .get("http://103.179.189.219//orders", {
         headers: {
           Authorization: `Bearer ${userData.message}`,
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const TableState = (props) => {
     const localState = localStorage.getItem("localState");
     const userData = JSON.parse(localState).userData;
     axios
-      .get("https://localhost:44307/api/orders/" + orderId, {
+      .get("http://103.179.189.219//orders/" + orderId, {
         headers: {
           Authorization: `Bearer ${userData.message}`,
           "Content-Type": "application/json",

@@ -3,7 +3,7 @@ import axios from "axios";
 export default class AuthApi {
   constructor() {
     this.client = null;
-    this.api_url = "https://localhost:44307/api";
+    this.api_url = "http://103.179.189.219/api";
   }
 
   init = () => {
