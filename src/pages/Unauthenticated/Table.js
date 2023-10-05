@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
-import Main from "./Main";
 
 const Table = () => {
   const authContext = useContext(AuthContext);
@@ -11,7 +10,7 @@ const Table = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <Main />;
+  return window.location.replace('http://localhost:3000/');
 };
 
 export default Table;

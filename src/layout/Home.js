@@ -12,20 +12,38 @@ import CheckOut from "../pages/user/CheckOut";
 import OrderDetails from "../pages/user/OrderDetails";
 import Profile from "../pages/user/Profile";
 import TableManager from "../pages/user/TableManager";
+import AdminPanel from "../pages/Admin/AdminPanel";
+import Transaction from "../pages/Admin/Transaction";
+import User from "../pages/Admin/User";
+
 
 const Home = () => {
   const authContext = useContext(AuthContext);
   const { table, isLoggedIn, role } = authContext;
   const isManager = role.includes("Manager");
+  const isAdmin = role.includes("Admin");
+
   //const isGuest = role.includes("Guest");
 
   return (
     <>
       <Switch>
         <Route exact path="/">
-          {<Main />}
+          {isAdmin ? <AdminPanel/>   :   <Main /> }
         </Route>
 
+        
+        <Route exact path="/transactions">
+          {isAdmin ? <Transaction/>   :   <NotFound /> }
+        </Route>
+        <Route exact path="/users">
+          {isAdmin ? <User/>   :   <NotFound /> }
+        </Route>
+
+        
+        <Route exact path="/orderManager">
+          {isAdmin ? <AdminPanel/>   :   <Main /> }
+        </Route>
         <Route exact path="/login">
           {isLoggedIn ? <Redirect to="/table" /> : <Login />}
         </Route>
@@ -49,7 +67,7 @@ const Home = () => {
           {<About />}
         </Route>
         <Route exact path="/tablemanager">
-          {isManager ? <TableManager /> : <Main />}
+          {isManager ? <TableManager /> : <NotFound />}
         </Route>
         <Route exact path="/table">
           {table ? <Redirect to="/share" /> : <Table />}

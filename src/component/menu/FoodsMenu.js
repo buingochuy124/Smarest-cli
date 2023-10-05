@@ -26,7 +26,6 @@ const FoodsMenu = () => {
   }, []);
 
   useEffect(() => {
-    //userRole();
     if (foodOrder.Id !== "") {
       axios
         .post("https://localhost:44307/api/carts/addtocart", foodOrder, {
@@ -53,7 +52,7 @@ const FoodsMenu = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
+    <div className=" grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
       {foods.map((food) => (
         <div key={food.id} className="w-full ">
           <div>
@@ -78,6 +77,10 @@ const FoodsMenu = () => {
           </div>
         </div>
       ))}
+          <div className="h-screen">
+
+          </div>
+
     </div>
   );
 };

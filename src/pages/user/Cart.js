@@ -35,7 +35,7 @@ const Cart = () => {
   }, [userToken]);
 
   return (
-    <div className="h-screen max-w-2xl mx-auto">
+    <div className="h-screen max-w-screen-2xl mx-auto">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="p-4">
           <label htmlFor="table-search" className="sr-only">
@@ -59,6 +59,8 @@ const Cart = () => {
                   <th scope="col" className="px-6 py-3">
                     Total
                   </th>
+                  <th scope="col" className="px-6 py-3">
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -73,10 +75,38 @@ const Cart = () => {
                     >
                       {item.itemName}
                     </th>
-                    <td className="px-5 py-4">{item.itemQuantity}</td>
+                    <td className="px-5 py-4"></td>
                     <td className="px-5 py-4">$ {item.cost}</td>
                     <td className="px-5 py-4">
                       $ {item.cost * item.itemQuantity}
+                    </td>
+                    <td className="px-5 py-4">
+                    <div>
+                      <label for="Quantity" class="sr-only"> Quantity </label>
+
+                      <div class="flex items-center gap-1">
+                        <button
+                          type="button"
+                          class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                        >
+                          &minus;
+                        </button>
+
+                        <input
+                          type="number"
+                          id="Quantity"
+                          value={item.itemQuantity}
+                          class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                        />
+
+                        <button
+                          type="button"
+                          class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                        >
+                          &plus;
+                        </button>
+                      </div>
+                    </div>
                     </td>
                   </tr>
                 ))}
@@ -84,6 +114,7 @@ const Cart = () => {
                 <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="px-36 py-4 dark:text-white"></td>
                   <td className="px-6 py-4"></td>
+                  <td className="px-6 py-4 "> </td>
                   <td className="px-6 py-4 "> </td>
                   <td className="px-5 py-4 "></td>
                 </tr>
@@ -96,10 +127,12 @@ const Cart = () => {
                   <td className="px-6 py-4  dark:text-white font-medium">
                     $ {totalHandle()}
                   </td>
+                  <td className="px-6 py-4  dark:text-white font-medium">
+                  </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
                     <button
                       onClick={CheckOutButtonHandle}
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded"
                     >
                       Check Out
                     </button>

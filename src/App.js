@@ -11,6 +11,8 @@ import TableState from "./context/table/TableState";
 import Footer from "./layout/Footer";
 import Home from "./layout/Home";
 import Navbar from "./layout/Navbar";
+import StatisticState from "./context/statistic/StatisticState";
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 function App() {
   return (
@@ -18,29 +20,35 @@ function App() {
       <GoogleOAuthProvider clientId="326826256356-d4njh6ls9fu9863inkvim9265efjse6s.apps.googleusercontent.com">
         <PayPalScriptProvider options={{ "client-id": "test" }}>
           <AuthState>
-            <OrderState>
-              <TableState>
-                <Router>
-                  <div className="App">
-                    <div>
-                      <Navbar />
-                    </div>
-                    <div className=" dark:bg-gray-900 ">
-                      <ToastContainer />
-                      <Home />
-                      <div className="dark:bg-gray-900">
-                        <br />
-                        <br />
-                        <br /> <br /> <br />
+            <StatisticState>
+              <OrderState>
+                <TableState>
+                  <Router>
+                    <div className="App">
+                      <div>
+                        <Navbar />
+                      </div>
+                      <div className=" dark:bg-gray-900 ">
+                        <ToastContainer />
+                        <Home />
+                        <MessengerCustomerChat
+                          pageId="141660889028110"
+                          appId="2088816924785631"
+                        />,
+                        <div className="dark:bg-gray-900">
+                          <br />
+                          <br />
+                          <br /> <br /> <br />
+                        </div>
+                      </div>
+                      <div className="footer">
+                        <Footer />
                       </div>
                     </div>
-                    <div className="footer">
-                      <Footer />
-                    </div>
-                  </div>
-                </Router>
-              </TableState>
-            </OrderState>
+                  </Router>
+                </TableState>
+              </OrderState>
+            </StatisticState>
           </AuthState>
         </PayPalScriptProvider>
       </GoogleOAuthProvider>

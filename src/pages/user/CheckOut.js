@@ -4,6 +4,8 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/auth/authContext";
 import OrderContext from "../../context/order/orderContext";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const CheckOut = () => {
   const CLIENT_ID =
@@ -23,9 +25,7 @@ const CheckOut = () => {
     });
   };
 
-  const onApprove = (data, actions) => {
-    return actions.order.capture();
-  };
+
 
   const authContext = useContext(AuthContext);
   const { userToken } = authContext;
@@ -33,9 +33,6 @@ const CheckOut = () => {
   const orderContext = useContext(OrderContext);
   const { checkOut } = orderContext;
 
-  const paypalClick = () => {
-    checkOut();
-  };
 
   useEffect(() => {
     axios
@@ -55,6 +52,12 @@ const CheckOut = () => {
       userEmail = element.user.email;
     });
     return userEmail;
+  };
+
+  const onSuccess = (payment) => {
+    // Handle successful payment here, e.g., send a message.
+    checkOut();
+    toast.success("Payment successful !!!",payment);
   };
 
   const totalHandle = () => {
@@ -128,14 +131,13 @@ const CheckOut = () => {
           <div className="mt-6 flex items-center justify-between">
             <p className="text-sm font-medium text-gray-900">Total</p>
             <p className="text-2xl font-semibold text-gray-900">
-              ${(totalHandle() / 10) * 11} (Included VAT tax)
+              ${((totalHandle() / 10) * 11).toFixed(3)} (Included VAT tax)
             </p>
           </div>
           <br></br>
           <PayPalButtons
-            onClick={paypalClick}
             createOrder={createOrder}
-            onApprove={onApprove}
+            onApprove={onSuccess}
             options={{
               clientId: CLIENT_ID,
               currency: CURRENCY,

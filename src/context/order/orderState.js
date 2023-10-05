@@ -59,6 +59,17 @@ const TableState = (props) => {
     //   // });
     // }
   };
+
+  const AdminGetOrders = async () =>{
+      const response = await orderApi.AdminGetOrder();
+      if(response.status === 200){
+          
+        
+       // console.log(response);
+
+        return response;
+      }
+  }
   const OrderDetailList = async (orderId) => {
     const localState = localStorage.getItem("localState");
     const userData = JSON.parse(localState).userData;
@@ -88,14 +99,7 @@ const TableState = (props) => {
     const response = await orderApi.CheckOut(userData.message);
 
     if (response.status === 200) {
-      toast.promise(
-        new Promise((resolve) => setTimeout(() => resolve(1), 10000)),
-        {
-          pending: "Check Out is pending",
-          success: "Checked Out",
-          error: "error",
-        }
-      );
+      
       console.log(response);
     } else {
       console.log("check out fail");
@@ -109,6 +113,7 @@ const TableState = (props) => {
         orderDetails: state.orderDetails,
         OrdersList,
         OrderDetailList,
+        AdminGetOrders,
       }}
     >
       {props.children}

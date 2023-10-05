@@ -1,9 +1,9 @@
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useReducer } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import AuthApi from "../../api/AuthApi";
 import AuthenContext from "./authContext";
 import AuthenReducer from "./authReducer";
+import "react-toastify/dist/ReactToastify.css";
 
 import { toast } from "react-toastify";
 import {
@@ -12,6 +12,7 @@ import {
   USER_ROLE,
   USER_TABLE,
   USER_TOKEN,
+  ADMIN_LOGIN
 } from "./types";
 
 const AuthState = (props) => {
@@ -56,6 +57,8 @@ const AuthState = (props) => {
   const loginUserWithGoogle = async (credentialResponse) => {
     const response = await authApi.loginWithGoogle(credentialResponse);
     if (response.status === 200) {
+      toast.success("Logged in !!!");
+
       dispatch({
         type: USER_LOGIN,
         payload: response.data,
@@ -65,19 +68,32 @@ const AuthState = (props) => {
 
   const loginUser = async (user) => {
     const response = await authApi.login(user);
-    toast.success("Logged in !!!");
 
     if (response.status === 200) {
-      dispatch({
-        type: USER_LOGIN,
-        payload: response.data,
-      });
+  
+    
+        dispatch({
+          type: USER_LOGIN,
+          payload: response.data,
+        });
+      
+      toast.success("Logged in !!!");
+
     }
 
     const decoded = jwt_decode(response.data.message);
     const role =
       decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     console.log(role);
+    let isAdmin = role[0] === "Admin";
+
+    if(isAdmin){
+      dispatch({
+        type: ADMIN_LOGIN,
+        payload: response.data
+      });
+    }
+
     dispatch({
       type: USER_ROLE,
       payload: role,

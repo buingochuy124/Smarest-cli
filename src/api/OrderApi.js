@@ -22,6 +22,15 @@ export default class OrderApi {
       },
     });
   };
+  AdminGetOrder = () => {
+    const token = JSON.parse(localStorage.getItem("localState")).userToken;
+    return this.init().get("Orders/AdminGetOrders/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+  }
   OrderDetails = (orderId) => {
     const token = JSON.parse(localStorage.getItem("localState")).userToken;
 

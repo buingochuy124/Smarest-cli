@@ -4,6 +4,7 @@ import {
   USER_LOGOUT,
   USER_ROLE,
   USER_TABLE,
+  ADMIN_LOGIN,
 } from "./types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -15,7 +16,6 @@ export default (state, action) => {
         isLoggedIn: true,
         userData: action.payload,
         tablesData: [],
-
         userToken: action.payload.message,
         refreshToken: action.payload.refreshToken,
         shareLinkItems: [
@@ -46,6 +46,38 @@ export default (state, action) => {
             title: "Cart",
             url: "/cart",
           },
+        ],
+      };
+    
+      case ADMIN_LOGIN:
+      return {
+        ...state,
+        shareLinkItems: [
+          {
+            id: 1,
+            title: "AdminPanel",
+            url: "/",
+          },
+          {
+            id: 2,
+            title: "Dashboard",
+            url: "/",
+          },
+          {
+            id: 3,
+            title: "Transactions",
+            url: "/transactions",
+          },
+          
+          {
+            id: 4,
+            title: "Users",
+            url: "/users",
+          }
+        
+        ],
+        authLinkItems: [
+       
         ],
       };
     case USER_LOGIN_BY_GOOGLE:
