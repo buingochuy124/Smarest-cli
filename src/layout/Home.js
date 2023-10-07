@@ -11,10 +11,13 @@ import Cart from "../pages/user/Cart";
 import CheckOut from "../pages/user/CheckOut";
 import OrderDetails from "../pages/user/OrderDetails";
 import Profile from "../pages/user/Profile";
-import TableManager from "../pages/user/TableManager";
+import TableManager from "../pages/Manager/TableManager";
 import AdminPanel from "../pages/Admin/AdminPanel";
 import Transaction from "../pages/Admin/Transaction";
 import User from "../pages/Admin/User";
+
+import Orders from "../pages/Manager/Orders";
+import ManagerPanel from "../pages/Manager/ManagerPanel";
 
 
 const Home = () => {
@@ -29,20 +32,25 @@ const Home = () => {
     <>
       <Switch>
         <Route exact path="/">
-          {isAdmin ? <AdminPanel/>   :   <Main /> }
+
+          {isAdmin ? <AdminPanel /> : isManager ? <ManagerPanel /> : <Main />}
         </Route>
 
-        
+
         <Route exact path="/transactions">
-          {isAdmin ? <Transaction/>   :   <NotFound /> }
+          {isAdmin ? <Transaction /> : <NotFound />}
         </Route>
         <Route exact path="/users">
-          {isAdmin ? <User/>   :   <NotFound /> }
+          {isAdmin ? <User /> : <NotFound />}
+        </Route>
+        
+        <Route exact path="/items">
+          {isAdmin ? <Main /> : <NotFound />}
         </Route>
 
-        
+
         <Route exact path="/orderManager">
-          {isAdmin ? <AdminPanel/>   :   <Main /> }
+          {isAdmin ? <AdminPanel /> : <Main />}
         </Route>
         <Route exact path="/login">
           {isLoggedIn ? <Redirect to="/table" /> : <Login />}
@@ -66,9 +74,15 @@ const Home = () => {
         <Route exact path="/about">
           {<About />}
         </Route>
+
         <Route exact path="/tablemanager">
           {isManager ? <TableManager /> : <NotFound />}
         </Route>
+        <Route exact path="/orders">
+          {isManager ? <Orders /> : <NotFound />}
+        </Route>
+
+
         <Route exact path="/table">
           {table ? <Redirect to="/share" /> : <Table />}
         </Route>

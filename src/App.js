@@ -24,17 +24,17 @@ function App() {
               <OrderState>
                 <TableState>
                   <Router>
-                    <div className="App">
+                    <div className="App dark:bg-gray-900">
                       <div>
                         <Navbar />
                       </div>
                       <div className=" dark:bg-gray-900 ">
                         <ToastContainer />
                         <Home />
-                        <MessengerCustomerChat
+                        {/* <MessengerCustomerChat
                           pageId="141660889028110"
                           appId="2088816924785631"
-                        />,
+                        />, */}
                         <div className="dark:bg-gray-900">
                           <br />
                           <br />

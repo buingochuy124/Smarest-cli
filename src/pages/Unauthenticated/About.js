@@ -3,14 +3,15 @@ import React from "react";
 const About = () => {
   return (
     <div className="h-screen text-left">
-      <br />
-      <br />
-      <br />
-      <h1 className=" text-white text-3xl text-center	">About us</h1>
 
-      <br />
-      <br />
-      <div className="text-justify ml-28 mr-28">
+
+      <h1 className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700 mt-3"></h1>
+      <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+      <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p>
+      <h1 className=" text-white text-3xl text-center	-mb-14">About us</h1>
+
+
+      <div className="text-justify m-28">
         <h2 className="mx-auto text-white text-2xl	">
           Welcome to Smarest, a culinary destination that celebrates the vibrant
           flavors and traditions of Vietnamese cuisine. Our restaurant was

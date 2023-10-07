@@ -12,7 +12,8 @@ import {
   USER_ROLE,
   USER_TABLE,
   USER_TOKEN,
-  ADMIN_LOGIN
+  ADMIN_LOGIN,
+  MANAGER_LOGIN
 } from "./types";
 
 const AuthState = (props) => {
@@ -64,23 +65,26 @@ const AuthState = (props) => {
         payload: response.data,
       });
     }
+
+    const decoded = jwt_decode(response.data.message);
+    const role =
+      decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    
+    dispatch({
+      type: USER_ROLE,
+      payload: role,
+    });
   };
 
   const loginUser = async (user) => {
     const response = await authApi.login(user);
-
     if (response.status === 200) {
-  
-    
         dispatch({
           type: USER_LOGIN,
           payload: response.data,
         });
-      
       toast.success("Logged in !!!");
-
     }
-
     const decoded = jwt_decode(response.data.message);
     const role =
       decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
@@ -94,6 +98,16 @@ const AuthState = (props) => {
       });
     }
 
+    let isManager = role[0] === "Manager";
+    if(isManager){
+      dispatch({
+        type: MANAGER_LOGIN,
+        payload: response.data
+      });
+    }
+
+
+
     dispatch({
       type: USER_ROLE,
       payload: role,
@@ -101,6 +115,10 @@ const AuthState = (props) => {
   };
 
   const userTable = async (table) => {
+
+
+
+
     dispatch({
       type: USER_TABLE,
       payload: table,

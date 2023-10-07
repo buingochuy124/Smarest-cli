@@ -5,6 +5,7 @@ import {
   USER_ROLE,
   USER_TABLE,
   ADMIN_LOGIN,
+  MANAGER_LOGIN
 } from "./types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -48,8 +49,38 @@ export default (state, action) => {
           },
         ],
       };
-    
-      case ADMIN_LOGIN:
+    case MANAGER_LOGIN:
+      return {
+        ...state,
+        shareLinkItems: [
+          {
+            id: 1,
+            title: "ManagerPanel",
+            url: "/",
+          },
+          {
+            id: 2,
+            title: "Booking List",
+            url: "/bookinglist",
+          },
+          {
+            id: 3,
+            title: "Orders",
+            url: "/orders",
+          },
+
+          {
+            id: 4,
+            title: "Table Manager",
+            url: "/tablemanager",
+          }
+
+        ],
+        authLinkItems: [
+
+        ],
+      };
+    case ADMIN_LOGIN:
       return {
         ...state,
         shareLinkItems: [
@@ -68,16 +99,31 @@ export default (state, action) => {
             title: "Transactions",
             url: "/transactions",
           },
-          
+
           {
             id: 4,
             title: "Users",
             url: "/users",
+          },
+          {
+            id: 5,
+            title: "Items",
+            url: "/items",
+          },
+          {
+            id: 6,
+            title: "Categories",
+            url: "/categories",
+          },
+          {
+            id: 7,
+            title: "tables",
+            url: "/tablemanager",
           }
-        
+
         ],
         authLinkItems: [
-       
+
         ],
       };
     case USER_LOGIN_BY_GOOGLE:

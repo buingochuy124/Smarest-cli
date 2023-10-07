@@ -69,15 +69,15 @@ const CheckOut = () => {
     return totalEach;
   };
   return (
-    <div className="h-screen">
-      <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+    <div className="h-screen dark:bg-gray-900">
+      <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 mt-12">
         <div className="px-4 pt-8">
           <p className="text-xl font-medium text-white">Order Summary</p>
           <p className="text-gray-400">Check your items.</p>
-          <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
+          <div className=" bg-gray-300 mt-8 space-y-3 rounded-lg border  px-2 py-4 sm:px-6">
             {cartItems.map((item) => (
               <div
-                className="flex flex-col rounded-lg bg-white sm:flex-row"
+                className="flex flex-col rounded-lg bg-gray-300 sm:flex-row"
                 key={item.id}
               >
                 <img
@@ -102,7 +102,7 @@ const CheckOut = () => {
             ))}
           </div>
         </div>
-        <div className="mt-9 bg-gray-50 px-4 pt-8 lg:mt-0 rounded-lg	">
+        <div className="bg-gray-300 px-4 pt-8 lg:mt-0 rounded-lg	">
           <p className="text-xl font-medium">Payment Details</p>
           <p className="text-gray-400">
             Complete your order by providing your payment details.

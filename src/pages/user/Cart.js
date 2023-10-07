@@ -75,39 +75,37 @@ const Cart = () => {
                     >
                       {item.itemName}
                     </th>
-                    <td className="px-5 py-4"></td>
+                    <td className="px-5 py-4">
+                      <div>
+                        <label htmlFor="Quantity" className="sr-only"> Quantity </label>
+                        <div className="flex items-center gap-1">
+                          {/* <button
+                          type="button"
+                          className="w-10 h-10 leading-10 text-white  transition hover:opacity-75"
+                        >
+                          &minus;
+                        </button> */}
+                          <input
+                            type="number"
+                            id="Quantity"
+                            disabled
+                            defaultValue={item.itemQuantity}
+                            className="bg-slate-400 text-black h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                          />
+                          {/* <button
+                          type="button"
+                          className="text-base w-10 h-10 leading-10 text-white  transition hover:opacity-75">
+                          +
+                        </button> */}
+                        </div>
+                      </div>
+                    </td>
                     <td className="px-5 py-4">$ {item.cost}</td>
                     <td className="px-5 py-4">
                       $ {item.cost * item.itemQuantity}
                     </td>
-                    <td className="px-5 py-4">
-                    <div>
-                      <label for="Quantity" class="sr-only"> Quantity </label>
+                    <td className="px-5 py-4"></td>
 
-                      <div class="flex items-center gap-1">
-                        <button
-                          type="button"
-                          class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                        >
-                          &minus;
-                        </button>
-
-                        <input
-                          type="number"
-                          id="Quantity"
-                          value={item.itemQuantity}
-                          class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                        />
-
-                        <button
-                          type="button"
-                          class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                        >
-                          &plus;
-                        </button>
-                      </div>
-                    </div>
-                    </td>
                   </tr>
                 ))}
 
@@ -124,20 +122,21 @@ const Cart = () => {
                     Total
                   </td>
                   <td className="px-6 py-4"></td>
+                  <td className="px-6 py-4"></td>
                   <td className="px-6 py-4  dark:text-white font-medium">
                     $ {totalHandle()}
                   </td>
-                  <td className="px-6 py-4  dark:text-white font-medium">
-                  </td>
+
                   <td className="px-6 py-4 font-medium dark:text-white">
                     <button
                       onClick={CheckOutButtonHandle}
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded"
+                      className="bg-amber-300 hover:bg-amber-400 text-black font-bold py-3 px-5 rounded"
                     >
                       Check Out
                     </button>
                   </td>
                 </tr>
+
               </tbody>
             </table>
           </div>
