@@ -58,12 +58,12 @@ const AuthState = (props) => {
   const loginUserWithGoogle = async (credentialResponse) => {
     const response = await authApi.loginWithGoogle(credentialResponse);
     if (response.status === 200) {
-      toast.success("Logged in !!!");
 
       dispatch({
         type: USER_LOGIN,
         payload: response.data,
       });
+
     }
 
     const decoded = jwt_decode(response.data.message);
@@ -74,6 +74,7 @@ const AuthState = (props) => {
       type: USER_ROLE,
       payload: role,
     });
+
   };
 
   const loginUser = async (user) => {

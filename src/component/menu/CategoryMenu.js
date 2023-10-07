@@ -16,7 +16,6 @@ const CategoryMenu = ({onChooseCategory}) => {
       })
       .then((response) => setCategories(response.data))
       .catch((error) => console.log(error));
-    console.log(categories);
   }, []);
 
 

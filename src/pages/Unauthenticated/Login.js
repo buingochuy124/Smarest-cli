@@ -12,9 +12,14 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [credentialResponse, setCredentialResponse] = useState({
-    credential: "",
-  });
+  // const [, setCredentialResponse] = useState({
+  //   credential: "",
+  // });
+
+  const credentialRes = {
+    credential: ""
+  };
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setLogin((prevState) => ({
@@ -23,12 +28,12 @@ const Login = () => {
     }));
   };
 
-  useEffect(() => {
-    onLoginGoogle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   const onLoginGoogle = () => {
-    loginUserWithGoogle(credentialResponse);
+    // console.log("cre"+credentialResponse);
+    // console.log();
+
+    loginUserWithGoogle(credentialRes);
   };
 
   const onSubmit = async (e) => {
@@ -80,10 +85,12 @@ const Login = () => {
                   const googleToken = JSON.stringify(
                     credentialResponse.credential
                   );
-                  setCredentialResponse({
-                    ...credentialResponse,
-                    credential: googleToken,
-                  });
+
+                  // setCredentialResponse({
+                  //   ...credentialResponse,
+                  //   credential: googleToken,
+                  // });
+                  credentialRes.credential = googleToken;
                   onLoginGoogle();
                 }}
                 onError={() => {
@@ -151,7 +158,7 @@ const Login = () => {
       </div>
       <div className="h-screen">
 
-</div>
+      </div>
     </div>
   );
 };
