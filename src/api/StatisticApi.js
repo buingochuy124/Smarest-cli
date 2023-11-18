@@ -34,7 +34,6 @@ export default class StatisticApi {
 
 
 
-    console.log(response.data);
 
     return response.data;
   }
@@ -58,9 +57,8 @@ export default class StatisticApi {
     });
 
     // Handle the response data here
-
     // You can return the response data or do something else with it
-    return response.data;
+    return response ;
 
   };
 

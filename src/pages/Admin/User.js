@@ -11,6 +11,10 @@ const User = () => {
     const authContext = useContext(AuthContext);
     const { userToken } = authContext;
 
+
+    const UserOrdersListButtonHandle = (userId) => {
+        window.location.replace("/profile/" + userId);
+    }
     useEffect(() => {
         axios
             .get(" https://localhost:44307/api/Users", {
@@ -19,7 +23,10 @@ const User = () => {
                     "Content-Type": "application/json",
                 },
             })
-            .then((response) => setUsers(response.data))
+            .then(
+                (response) => setUsers(response.data)
+                // (response) => console.log(response.data)
+                )
             .catch((error) => console.log(error));
     }, []);
     return (
@@ -59,7 +66,7 @@ const User = () => {
                                             })}
                                         </td>
                                         <td className="px-6 py-4 font-semibold">
-                                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                            <button  onClick={() => UserOrdersListButtonHandle(user.id)}  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                             Order history
                                             </button>
                                         </td>

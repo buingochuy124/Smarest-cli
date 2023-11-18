@@ -116,10 +116,6 @@ const AuthState = (props) => {
   };
 
   const userTable = async (table) => {
-
-
-
-
     dispatch({
       type: USER_TABLE,
       payload: table,

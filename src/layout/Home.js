@@ -18,6 +18,7 @@ import User from "../pages/Admin/User";
 
 import Orders from "../pages/Manager/Orders";
 import ManagerPanel from "../pages/Manager/ManagerPanel";
+import UserOrdersProfile from "../pages/user/UserOrdersProfile";
 
 
 const Home = () => {
@@ -92,6 +93,13 @@ const Home = () => {
         <Route exact path="/profile">
           {!isLoggedIn ? <Redirect to="/login" /> : <Profile />}
         </Route>
+
+
+        <Route exact path="/profile/:UserId">
+          {!isLoggedIn ? <Redirect to="/login" /> : <UserOrdersProfile />}
+        </Route>
+
+
         <Route path="" component={NotFound} />
       </Switch>
     </>

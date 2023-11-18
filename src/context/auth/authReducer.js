@@ -110,13 +110,9 @@ export default (state, action) => {
             title: "Items",
             url: "/items",
           },
+       
           {
             id: 6,
-            title: "Categories",
-            url: "/categories",
-          },
-          {
-            id: 7,
             title: "tables",
             url: "/tablemanager",
           }

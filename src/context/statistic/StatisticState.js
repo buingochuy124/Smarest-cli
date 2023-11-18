@@ -11,7 +11,7 @@ const StatisticState = (props) => {
     const getOrdersInRange = async (newRange) => {
         const response = await statisticApi.dashboardStats(newRange);
         if (response.status === 200) {
-            return response.data;
+            return response;
         }
     };
 

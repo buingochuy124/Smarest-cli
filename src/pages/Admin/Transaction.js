@@ -12,7 +12,9 @@ const Transaction = () => {
 
     const authContext = useContext(AuthContext);
     const { userToken } = authContext;
-
+    const DetailButtonHandle = (orderId) => {
+        window.location.replace("/orderdetails/" + orderId);
+    }
     useEffect(() => {
         axios
             .get("https://localhost:44307/api/orders/AdminGetOrders", {
@@ -21,7 +23,12 @@ const Transaction = () => {
                     "Content-Type": "application/json",
                 },
             })
-            .then((response) => setOrders(response.data))
+            .then(
+                
+               
+                (response) => setOrders(response.data)
+     
+                )
             .catch((error) => console.log(error));
     }, []);
 
@@ -41,27 +48,28 @@ const Transaction = () => {
                 </thead>
                 <tbody>
                     {
-                        orders.map((user, k) => {
+                        orders.map((order, k) => {
                             return (
                                 <tr key={k}>
                                     <td className="px-6 py-4 font-semibold">
                                         <div className="flex items-center space-x-3">
 
                                             <div>
-                                                <div className="font-bold">{user.userName}</div>
+                                                <div className="font-bold">{order.userName}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 font-semibold" >{user.total}</td>
+                                    <td className="px-6 py-4 font-semibold" >$ {order.total}</td>
                                     <td className="px-6 py-4 font-semibold">
-                                        {new Date(user.createdDate).toLocaleDateString('en-US', {
+            
+                                        {new Date(order.date).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: '2-digit',
                                             day: '2-digit'
                                         })}
                                     </td>
                                     <td className="px-6 py-4 font-semibold">
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                        <button  onClick={() => DetailButtonHandle(order.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                             Detail
                                         </button>
                                     </td>

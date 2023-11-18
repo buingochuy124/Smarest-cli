@@ -143,6 +143,11 @@ const CheckOut = () => {
               currency: CURRENCY,
             }}
           />
+          {/* <PayPalButtons 
+              createOrder={createOrder}
+                onApprove={onSuccess}
+
+          /> */}
         </div>
       </div>
     </div>

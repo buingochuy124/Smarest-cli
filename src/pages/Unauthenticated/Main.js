@@ -27,7 +27,6 @@ const Main = () => {
     else{
       toast.error("Some thing wrong !!!");
     }
-    
   }
 
 

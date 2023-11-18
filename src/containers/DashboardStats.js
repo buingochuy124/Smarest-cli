@@ -9,8 +9,8 @@ function DashboardStats({title, value, description, colorIndex}){
     }
     
     return(
-        <div className=" ml-12 mr-12 stats shadow rounded-xl" style={{backgroundColor:"#2A303C"}}>
-            <div className="stat mt-2 mb-2 ml-10 text-left	">
+        <div className=" ml-12 mr-12 stats shadow rounded-xl w-72 inline-block" style={{backgroundColor:"#2A303C"}}>
+            <div className="stat mt-2 mb-2 ml-10 text-left">
                 <div className="stat-title dark:text-slate-300" style={{color:"#CBD5E1"}}>{title}</div>
                 <div className={`stat-value font-bold dark:text-slate-300 text-5xl text-${COLORS[colorIndex%2]}`}>{value}</div>
                 <div className={"stat-desc  " + getDescStyle()} >{description}</div>

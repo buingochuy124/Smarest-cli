@@ -26,6 +26,29 @@ const TableState = (props) => {
   }, []);
   const orderApi = new OrderApi();
 
+  const UserOrdersList = async (userId) => {
+    const localState = localStorage.getItem("localState");
+    const userData = JSON.parse(localState).userData;
+    axios
+    .get("https://localhost:44307/api/Orders/UserOrders/"+userId, {
+      headers: {
+        Authorization: `Bearer ${userData.message}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("data", response.data);
+        dispatch({
+          type: LIST_ORDER,
+          payload: response.data,
+        });
+      } else {
+        toast.error("Some thing wrong !!!");
+      }
+    })
+  }
+
   const OrdersList = async () => {
     const localState = localStorage.getItem("localState");
 
@@ -112,6 +135,7 @@ const TableState = (props) => {
         orders: state.orders,
         orderDetails: state.orderDetails,
         OrdersList,
+        UserOrdersList,
         OrderDetailList,
         AdminGetOrders,
       }}
