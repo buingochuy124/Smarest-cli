@@ -2,12 +2,9 @@
 FROM node:18-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --force or --legacy-peer-deps
 COPY . .
-RUN npm start
-
-# Production stage
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+ARG ENV=production
+ENV NODE_ENV=production
+CMD ["sh", "-c", "npm run start:$NODE_ENV"]
